@@ -1,24 +1,28 @@
-const PopUpSignInForm = () =>{
-    return (
+const PopUpSignUpForm = () =>{
+    return(
         <section className = "text-center m-3">
             <div>
-                <h2>Welcome to Sign in Form</h2>
+                <h2>Welcome to Sign Up Form</h2>
                 <form action="/" method="get">
                     <div>
                         <label for="name">Username</label>
                         <input type="text" name="userName" placeholder="Input Username" required/>
                     </div>
                     <div>
-                        <label for ="password">Password</label>
+                        <label for ="password">Password: </label>
+                        <input type="text" name="password" placeholder="Re-enter Password" required/>
+                    </div>
+                    <div>
+                        <label for ="password">Re-enter Password: </label>
                         <input type="text" name="password" placeholder="Input Password" required/>
                     </div>
                     <div>
-                        <input type="text" name="password" placeholder="Input Password" required/>
-                        <input type="submit" value="Login"/>
+                        <input type="submit" value="Sign UP"/>
                     </div>
                 </form>
             </div>
-        </section>
+    </section>  
     );
 }
-export default PopUpSignInForm;
+
+export default PopUpSignUpForm;

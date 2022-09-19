@@ -1,7 +1,9 @@
-import logo from './logo.svg';
 import './App.css';
 import React, {useEffect,useState} from "react";
 import NavBar from './components/NavBar';
+import {useSelector} from "react-redux";
+import PopUpSignInForm from "./components/PopUpSignInForm";
+import PopUpSignUpForm from './components/PopUpSignUpForm';
 
 function App() {
   const [backendData, setBackendData] = useState([{}]);
@@ -13,6 +15,8 @@ function App() {
       data =>{setBackendData(data)}
     )
   },[])
+  const isLogin = useSelector((state)=>state.isLogged);
+  const signUp = useSelector((state)=>state.signUp);
 
   return (
     <div className="App">
@@ -23,6 +27,8 @@ function App() {
       )))
       } */}
       <NavBar/>
+      {isLogin && <PopUpSignInForm />}
+      {signUp && <PopUpSignUpForm/>}
     </div>
   );
 }

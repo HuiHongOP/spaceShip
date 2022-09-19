@@ -1,5 +1,5 @@
 import { Container, Nav,Navbar,NavDropdown } from "react-bootstrap";
-import Signin from "./Signin";
+import AccountManage from "./AccountManage";
 
 const NavBar = ()=>{
 
@@ -26,10 +26,8 @@ const NavBar = ()=>{
           </Nav>
         </Navbar.Collapse>
       </Container>
-      <Signin/>
-      {/* <button onClick={activeSignUpForm}>Sign up</button> */}
-
-      {/* <button>Sign in</button> */}
+      {/* To Manage the Sign In and Sign Up Form */}
+      <AccountManage/>
     </Navbar>
 
     );
