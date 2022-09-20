@@ -13,7 +13,6 @@ const PopUpSignInForm = () =>{
                         <input type="text" name="password" placeholder="Input Password" required/>
                     </div>
                     <div>
-                        <input type="text" name="password" placeholder="Input Password" required/>
                         <input type="submit" value="Login"/>
                     </div>
                 </form>

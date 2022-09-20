@@ -4,6 +4,9 @@ import NavBar from './components/NavBar';
 import {useSelector} from "react-redux";
 import PopUpSignInForm from "./components/PopUpSignInForm";
 import PopUpSignUpForm from './components/PopUpSignUpForm';
+import Banner from "./components/Banner";
+import Products from "./components/Products";
+
 
 function App() {
   const [backendData, setBackendData] = useState([{}]);
@@ -29,6 +32,8 @@ function App() {
       <NavBar/>
       {isLogin && <PopUpSignInForm />}
       {signUp && <PopUpSignUpForm/>}
+      <Banner/>
+      <Products/>
     </div>
   );
 }
