@@ -32,10 +32,10 @@ const createUser = (req,res) => {
     /*if(!req.header('apiKey') || req.header('apiKey') !== process.env.API_KEY) {
         return res.status(401).json({status: 'error',message: 'Unauthorized'})
     }*/
-    const {name,email,password} = req.body
+    const {username,email,password} = req.body
         //const password = CryptoJS.AES.encrypt(req.body, 'Secrete Phrase')
 
-    pool.query('INSERT INTO users (name,email,password) VALUES ($1,$2,$3)', [name,email,password],(error,result)=>{
+    pool.query('INSERT INTO users (username,email,password) VALUES ($1,$2,$3)', [username,email,password],(error,result)=>{
         if(error){
             throw error
         }
@@ -52,7 +52,7 @@ const updateUser = (req,res) => {
     const id = req.params.id
     const {password} = req.body
     pool.query(
-        'UPDATE users SET password = $1',[password],(error,result) => {
+        'UPDATE users SET password = $1 WHERE id = $2',[password, id],(error,result) => {
             if(error) {
                 throw error
             }
