@@ -1,8 +1,9 @@
 const express = require('express')
-const bodyParser = require('body-parser')
 const app = express()
-const db = require('./dbQueries')
-const port = 5000
+const bodyParser = require('body-parser')
+const userRoutes = require('./userRoutes')
+const productRoutes = require('./productRoutes')
+const port = process.env.PORT || 5000
 
 app.use(bodyParser.json())
 app.use(
@@ -11,11 +12,8 @@ app.use(
   })
 )
 
-app.get('/accounts', db.getUsers)
-app.get('/accounts/:id', db.getUserById)
-app.post('/accounts', db.createUser)
-app.put('/accounts/:id', db.updateUser)
-app.delete('/accounts/:id', db.deleteUser)
+app.use("/api/user", userRoutes);
+app.use("/api/products", productRoutes)
 
 app.listen(port, () => {
   console.log(`App running on port ${port}.`)
