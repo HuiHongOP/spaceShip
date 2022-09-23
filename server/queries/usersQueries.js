@@ -1,8 +1,8 @@
-const pool = require('./config')
-const  bcrypt = require('bcrypt');
-const jwtTokens = require('./utils/jwt_helper')
+const pool = require('../config')
+const bcrypt = require('bcrypt');
+const jwtTokens = require('../utils/jwt_helper')
 const jwt = require('jsonwebtoken')
-const express = require('./express')
+const express = require('../express')
 require('dotenv').config()
 // get all users
 const getUsers = async (req,res) => {

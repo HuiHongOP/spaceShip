@@ -1,6 +1,6 @@
 const router = require('express').Router()
 const { authenticateToken } = require('../auth')
-const db = require('../usersQueries')
+const db = require('../queries/usersQueries')
 
 router.get('/accounts',authenticateToken, db.getUsers)
 router.get('/accounts/:id', authenticateToken, db.getUserById)

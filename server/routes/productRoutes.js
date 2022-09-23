@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const db = require('../productQueries')
+const db = require('../queries/productQueries')
 
 // get all products order by ID
 router.get('/product', db.getProducts)
@@ -11,5 +11,7 @@ router.post('/product', db.createProduct)
 router.put('/product/:id', db.updateProduct)
 // delete product by ID
 router.delete('/product/:id', db.deleteProductById)
+// filter categories
+router.get('/product_filter', db.filterCategorie)
 
 module.exports = router;
