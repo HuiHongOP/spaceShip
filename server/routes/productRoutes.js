@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const db = require('./productQueries')
+const db = require('../productQueries')
 
 // get all products order by ID
 router.get('/product', db.getProducts)

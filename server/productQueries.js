@@ -1,3 +1,4 @@
+const { authenticateToken } = require('./auth')
 const pool = require('./config')
 
 // get all products
@@ -14,10 +15,10 @@ const getProducts = (req,res) => {
 
 // create product
 const createProduct  = (req,res) => {
-    const {title, descr, img, categories, size, price, created_at} = req.body
+    const {title, descr, img, categories, size, price} = req.body
     //const password = CryptoJS.AES.encrypt(req.body, 'Secrete Phrase')
 
-    pool.query('INSERT INTO product (title, descr, img, categories, size, price, created_at) VALUES ($1,$2,$3,$4,$5,$6,$7)', [title, descr, img, categories, size, price, created_at],
+    pool.query('INSERT INTO product (title, descr, img, categories, size, price) VALUES ($1,$2,$3,$4,$5,$6)', [title, descr, img, categories, size, price],
         (error,result) =>{
             if(error){
                 throw error
