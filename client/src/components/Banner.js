@@ -4,7 +4,7 @@ import bannerImage from "../assets/img/Banner.jpg";
 const Banner = () =>{
 
     return(
-    <Card className="bg-dark text-white">
+    <Card className="bg-dark text-white" id ="">
         <Card.Img src={bannerImage} />
         <Card.ImgOverlay>
             <Container>
