@@ -6,7 +6,7 @@ import PopUpSignInForm from "./components/PopUpSignInForm";
 import PopUpSignUpForm from './components/PopUpSignUpForm';
 import Banner from "./components/Banner";
 import Products from "./components/Products";
-
+import Cart from "./components/Cart";
 
 function App() {
   const [backendData, setBackendData] = useState([{}]);
@@ -20,7 +20,7 @@ function App() {
   },[])
   const isLogin = useSelector((state)=>state.isLogged);
   const signUp = useSelector((state)=>state.signUp);
-
+  const checkCart = useSelector((state)=>state.cartCheck);
   return (
     <div className="App">
       {/* {(typeof backendData.users === 'undefined') ? 
@@ -32,8 +32,12 @@ function App() {
       <NavBar/>
       {isLogin && <PopUpSignInForm />}
       {signUp && <PopUpSignUpForm/>}
-      <Banner/>
-      <Products/>
+      {checkCart ? <Cart/> : 
+        <div>        
+          <Banner/>
+          <Products/>
+        </div>
+      }
     </div>
   );
 }
