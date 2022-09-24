@@ -1,7 +1,7 @@
 import { Container, Nav,Navbar,Badge,Button} from "react-bootstrap";
 import AccountManage from "./AccountManage";
 import {useSelector,useDispatch} from "react-redux";
-import {checkCart} from "../actions/index"
+import {checkCart,disableCheckCart} from "../actions/index"
 
 const NavBar = ()=>{
   const cart = useSelector((state)=>state.cartHandle);
@@ -9,7 +9,7 @@ const NavBar = ()=>{
   return(
   <Navbar bg="light" expand="lg">
       <Container>
-        <Navbar.Brand href="#home">spaceShip</Navbar.Brand>
+        <Navbar.Brand href="#home" onClick= {()=>dispatch(disableCheckCart())}>spaceShip</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">

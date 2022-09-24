@@ -29,3 +29,9 @@ export const checkCart = () =>{
         type: "CHECKCART"
     }
 }
+
+export const disableCheckCart = () =>{
+    return {
+        type: "DISABLECHECKCART"
+    }
+}
