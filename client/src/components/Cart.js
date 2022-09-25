@@ -11,7 +11,6 @@ const Cart = () => {
     return (
         <div id ="cart">
             <Container>
-                <button type="button" class="btn-close" aria-label="Close" onClick = { ()=> dispatch(disableCheckCart())}></button>
                 <Container>
                     {cartItems.map((product,idex) =>(
                             <Row>

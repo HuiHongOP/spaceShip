@@ -1,26 +1,41 @@
 import { Container, Nav,Navbar,Badge,Button} from "react-bootstrap";
-import AccountManage from "./AccountManage";
-import {useSelector,useDispatch} from "react-redux";
-import {checkCart,disableCheckCart} from "../actions/index"
+import {useSelector} from "react-redux";
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {faCartShopping,faRightToBracket,faAddressCard} from '@fortawesome/free-solid-svg-icons';
+import {LinkContainer} from 'react-router-bootstrap'
 
 const NavBar = ()=>{
   const cart = useSelector((state)=>state.cartHandle);
-  const dispatch = useDispatch();
   return(
   <Navbar bg="light" expand="lg">
       <Container>
-        <Navbar.Brand href="#home" onClick= {()=>dispatch(disableCheckCart())}>spaceShip</Navbar.Brand>
+        <LinkContainer to="/">
+          <Navbar.Brand>spaceShip</Navbar.Brand>
+        </LinkContainer>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="me-auto">
-            <Nav.Link href="#home">Home</Nav.Link>
-            <Nav.Link href="#discover">Discover</Nav.Link>
+          <Nav className="ms-auto">
+            <LinkContainer to="/">
+              <Nav.Link>Home</Nav.Link>
+            </LinkContainer>
+            {/* Current is empty */}
+            <LinkContainer to="discover">
+              <Nav.Link>Discover</Nav.Link>
+            </LinkContainer>
           </Nav>
         </Navbar.Collapse>
       </Container>
       {/* To Manage the Sign In and Sign Up Form */}
-      <AccountManage/>
-      <Button onClick= {()=>dispatch(checkCart())}>Cart <Badge bg="danger">{cart.length}</Badge></Button>
+      {/* <AccountManage/> */}
+      <LinkContainer to= "/signIn">
+        <Nav.Link ><FontAwesomeIcon icon={faRightToBracket}></FontAwesomeIcon> Sign In </Nav.Link>
+      </LinkContainer>
+      <LinkContainer to= "/signUp">
+        <Nav.Link><FontAwesomeIcon icon={faAddressCard}></FontAwesomeIcon> Sign Up </Nav.Link>
+      </LinkContainer>
+      <LinkContainer to= "/checkCart">
+        <Nav.Link><FontAwesomeIcon icon={faCartShopping}></FontAwesomeIcon> Cart <Badge bg="danger">{cart.length}</Badge> </Nav.Link>
+      </LinkContainer>
     </Navbar>
     );
 }

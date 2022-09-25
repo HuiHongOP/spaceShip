@@ -12,3 +12,17 @@
 .price-tag{
     font-size: 1.5rem;
 }
+
+
+
+/* Sign IN Section */
+.sign-in-section{
+    background: linear-gradient(#e66465, #9198e5);
+    height: 100vh;
+    border-radius: 2%;
+}
+.sign-in-section .sign-in-form{
+    position: absolute;
+    top: 40%;
+    left: 40%;
+}
