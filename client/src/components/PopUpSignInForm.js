@@ -43,12 +43,12 @@ const PopUpSignInForm = () =>{
     }
 
     return (
-        <section className = "text-center m-3">
+        <section className = "sign-in-section text-center m-3">
             <div>
-                <h2>Welcome to Sign in Form</h2>
-                <form action="/" method="get" onSubmit={handleSubmit}>
+                <form className="sign-in-form" action="/" method="get" onSubmit={handleSubmit}>
+                    <h2>Welcome to Sign in Form</h2>
                     <div>
-                        <label for="name">Username</label>
+                        <label for="name">Username/Email Address</label>
                         <input type="text" name="userName" placeholder="Input Username" onChange = { (e) => setUser(e.target.value)} required/>
                     </div>
                     <div>
