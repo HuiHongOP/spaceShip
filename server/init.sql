@@ -1,0 +1,42 @@
+-- used for heroku initialization;
+CREATE TABLE users (
+    ID SERIAL NOT NULL PRIMARY KEY,
+    username TEXT NOT NULL UNIQUE,
+    email TEXT NOT NULL,
+    password TEXT NOT NULL,
+    isAdmin BOOLEAN DEFAULT FALSE,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE product (
+    ID SERIAL NOT NULL PRIMARY KEY,
+    title VARCHAR(64) NOT NULL,
+    descr VARCHAR(2000) NOT NULL,
+    img VARCHAR(64) NOT NULL,
+    categories TEXT [],
+    size VARCHAR(30),
+    price FLOAT(8) NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE cart (
+    ID SERIAL NOT NULL PRIMARY KEY,
+    userid TEXT NOT NULL,
+    items JSONB NOT NULL,
+    amount INT NOT NULL,
+    address JSONB,
+    status TEXT DEFAULT 'pending',
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE orders (
+    ID SERIAL NOT NULL PRIMARY KEY, 
+    userid TEXT NOT NULL,
+    items JSONB NOT NULL,
+    amount INT NOT NULL,
+    address JSONB NOT NULL,
+    status TEXT DEFAULT 'pending',
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+ALTER TABLE users ADD CONSTRAINT email_unique UNIQUE (email);
