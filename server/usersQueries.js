@@ -82,6 +82,7 @@ const deleteUser = (req,res) => {
 }
 
 const login = async (req,res) => {
+    console.log("Attempt to login")
     try {
         const {username,password} = req.body;
         const users = await pool.query('SELECT * FROM users WHERE username = $1', [username]);
