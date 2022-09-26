@@ -1,0 +1,35 @@
+//// USER API
+
+//USER REGISTRATION
+// post
+register(username, email, password)
+
+//GET ALL USERS
+// get
+getUsers()
+
+//GET USER BY ID
+// get
+getUserById(id)
+
+//UPDATE USER PASSWORD
+// put
+updateUser(PASSWORD)
+
+//DELETE USER
+// deleteUser
+deleteUser(id)
+
+// LOGIN
+// post
+login(username, password)
+
+//REFRESH TOKEN
+// get
+refresh_token()
+
+//LOGOUT
+// delete
+logout()
+
+
