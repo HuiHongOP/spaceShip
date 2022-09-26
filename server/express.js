@@ -3,6 +3,8 @@ const app = express()
 const bodyParser = require('body-parser')
 const userRoutes = require('./routes/userRoutes')
 const productRoutes = require('./routes/productRoutes')
+const cartRoutes = require('./routes/cartRoutes')
+const orderRoutes = require('./routes/orderRoutes')
 const port = process.env.PORT || 5000
 const cookieParser = require("cookie-parser");
 
@@ -16,6 +18,8 @@ app.use(
 
 app.use("/api/user", userRoutes);
 app.use("/api/products", productRoutes)
+app.use('/api/cart', cartRoutes)
+app.use('/api/orders',orderRoutes)
 
 app.listen(port, () => {
   console.log(`App running on port ${port}.`)

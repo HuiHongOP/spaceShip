@@ -1,8 +1,8 @@
-const pool = require('./config')
-const  bcrypt = require('bcrypt');
-const jwtTokens = require('./utils/jwt_helper')
+const pool = require('../config')
+const bcrypt = require('bcrypt');
+const jwtTokens = require('../utils/jwt_helper')
 const jwt = require('jsonwebtoken')
-const express = require('./express')
+const express = require('../express')
 require('dotenv').config()
 // get all users
 const getUsers = async (req,res) => {
@@ -38,10 +38,10 @@ const createUser = async (req,res) => {
         return res.status(401).json({status: 'error',message: 'Unauthorized'})
     }*/
     try {
-        const {username,email} = req.body
+        const {username,email,isadmin} = req.body
         const password = req.body.password
         const hashedPassword = await bcrypt.hash(password, 10);
-        const newUser = await pool.query('INSERT INTO users (username,email,password) VALUES ($1,$2,$3) RETURNING *', [username,email,hashedPassword]);
+        const newUser = await pool.query('INSERT INTO users (username,email,password,isadmin) VALUES ($1,$2,$3,$4) RETURNING *', [username,email,hashedPassword,isadmin]);
         res.json({users:newUser.rows[0]});
     }
     catch (error) {
@@ -83,13 +83,14 @@ const deleteUser = (req,res) => {
 
 const login = async (req,res) => {
     try {
-        const {username,password} = req.body;
+        const {username,password,isadmin} = req.body;
         const users = await pool.query('SELECT * FROM users WHERE username = $1', [username]);
         if (users.rows.length == 0) {
             return res.status(401).json({error: "Incorrect Credentials"})
         }
         console.log(users.rows[0])
         const validatePassword = await bcrypt.compare(password, users.rows[0].password);
+        console.log(validatePassword)
         if (!validatePassword) {
             return res.status(401).json({error: "Incorrect Password"})
         }

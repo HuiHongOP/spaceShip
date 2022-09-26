@@ -1,5 +1,5 @@
-const { authenticateToken } = require('./auth')
-const pool = require('./config')
+const pool = require('../config')
+// queries for product route
 
 // get all products
 const getProducts = (req,res) => {
@@ -27,6 +27,30 @@ const createProduct  = (req,res) => {
         })
 }
 
+// get product by categorie
+const filterCategorie = async (req, res) => {
+    try {
+        let categories = req.query.categories;
+        if (!Array.isArray(categories)) {
+            categories = [categories]
+        }
+        let string = ''
+        let num_incre = 0
+        for (let i = 0; i < categories.length; i++) {
+            num_incre += 1
+            string += '$' + num_incre.toString() + '=' + 'ANY(categories)'
+            if ( i != categories.length-1) {
+                string += ' and '
+            } 
+        }
+        const filter = await pool.query(`SELECT * FROM product WHERE ${string}`, categories);
+        res.send(filter.rows)
+    }
+    catch(error) {
+        res.status(500).json({error: error.message});
+    }
+}   
+
 // update product
 const updateProduct = (req,res) => {
     /*if(!req.header('apiKey') || req.header('apiKey') !== process.env.API_KEY) {
@@ -39,7 +63,7 @@ const updateProduct = (req,res) => {
             if(error) {
                 throw error
             }
-            res.status(200).send(`User modified with ID: ${id}`)
+            res.status(200).send(`Product modified with ID: ${id}`)
         }
     )
 }
@@ -75,5 +99,6 @@ module.exports = {
     createProduct,
     updateProduct,
     getProductById,
-    deleteProductById
+    deleteProductById,
+    filterCategorie
 }
