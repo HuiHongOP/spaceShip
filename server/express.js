@@ -16,8 +16,8 @@ const origin = {
 }
 
 app.use(cors(origin))
-app.use(compression)
-app.use(helmet)
+app.use(compression())
+app.use(helmet())
 app.use(cookieParser())
 app.use(bodyParser.json())
 app.use(
