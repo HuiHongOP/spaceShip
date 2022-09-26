@@ -4,6 +4,7 @@ const db = require('../queries/usersQueries')
 
 router.get('/accounts',authenticateToken, db.getUsers)
 router.get('/accounts/:id', authenticateToken, db.getUserById)
+// CREATE USER
 router.post('/accounts', db.createUser)
 router.put('/accounts/:id', authenticateToken, db.updateUser)
 router.delete('/accounts/:id', authenticateToken, db.deleteUser)
