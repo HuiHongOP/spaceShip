@@ -11,7 +11,7 @@ const compression = require('compression')
 const helmet = require('helmet')
 const isProduction = process.env.NODE_ENV === 'production'
 const origin = {
-  origin: isProduction ? 'https://spaceshipacc.herokuapp.com' : '*',
+  origin: isProduction ? 'https://spaceshipacc.herokuapp.com/' : '*',
 }
 
 app.use(cors(origin))
