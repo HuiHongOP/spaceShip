@@ -38,7 +38,7 @@ const createUser = async (req,res) => {
         return res.status(401).json({status: 'error',message: 'Unauthorized'})
     }*/
     try {
-        const {username,email,isadmin} = req.body
+        const {username,email} = req.body
         const password = req.body.password
         const hashedPassword = await bcrypt.hash(password, 10);
         const newUser = await pool.query('INSERT INTO users (username,email,password,isadmin) VALUES ($1,$2,$3,$4) RETURNING *', [username,email,hashedPassword,isadmin]);
