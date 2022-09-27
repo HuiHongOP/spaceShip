@@ -83,7 +83,7 @@ const deleteUser = (req,res) => {
 
 const login = async (req,res) => {
     try {
-        const {username,password,isadmin} = req.body;
+        const {username,password} = req.body;
         const users = await pool.query('SELECT * FROM users WHERE username = $1', [username]);
         if (users.rows.length == 0) {
             return res.status(401).json({error: "Incorrect Credentials"})
