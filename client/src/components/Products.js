@@ -4,6 +4,7 @@ import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 import ProductCard from './ProductCard';
 import PageinationComp from './Pageination';
+import {CheckBox, Collapse} from "antd";
 
 const Products = ()=>{
 
@@ -12,7 +13,23 @@ const Products = ()=>{
     const [currentPage,setCurrentPage] = useState(1);
     const [postsPerPage,setPostsPerPage] = useState(12);
     const [loading,setLoading] = useState(false);
+    const [allCategories,setAllCategories] = useState([]);
     let componentMounted = true;
+
+
+    // Helps to get through all the categories and make them unqiue
+    // const getCategories = (datas) =>{
+    //     let newCategories = [];
+    //     for(let i = 0; i<datas.length;i++){
+    //         newCategories.push(datas[i].category.name);
+    //         console.log(datas[i].category.name);
+    //     }
+    //     const uniqueCategories = [...new Set(newCategories)];
+    //     setAllCategories(uniqueCategories);
+    //     console.log(allCategories);
+    // }
+
+
 
     useEffect(()=>{
         const getProducts = async () =>{
@@ -22,6 +39,8 @@ const Products = ()=>{
                 setData( await response.clone().json());
                 setFilter(await response.json());
                 setLoading(false);
+                // getCategories(data);
+                // console.log("Hello World");
             }
             return () =>{
                 componentMounted = false;
@@ -40,6 +59,7 @@ const Products = ()=>{
     }
 
     const filterCategory = (cat) =>{
+        console.log(typeof(cat));
         const updatedList = data.filter((product) => product.category.name === cat);
         setFilter(updatedList);
     }
@@ -53,16 +73,25 @@ const Products = ()=>{
         return (
             <div id="">
                 <div className="text-center">
+                    <h2>Fliter By category</h2>
                     <button className="m-2" onClick = {()=>setFilter(data)}> ALL</button>
+                    {/* {allCategories.map((category,index)=>(
+                        <button className="m-2" onClick = {()=>filterCategory({category})}>{category}</button>
+                    ))}
+                    <p>empty</p> */}
+                    {/* <div>
+                    </div> */}
                     <button className="m-2" onClick = {()=>filterCategory("Shoes")}> Shoes</button>
                     <button className="m-2" onClick = {()=> filterCategory("Others")}> Others</button>
                     <button className="m-2" onClick = {()=> filterCategory("Electronics")}> Electronics</button>
                 </div>
-                <ProductCard filter={currentPosts}/>
-                <PageinationComp totalPosts={filter.length}
-                 postsPerPage = {postsPerPage}
-                 setCurrentPage = {setCurrentPage}
-                 currentPage = {currentPage}/>
+                <div>
+                    <ProductCard filter={currentPosts}/>
+                    <PageinationComp totalPosts={filter.length}
+                    postsPerPage = {postsPerPage}
+                    setCurrentPage = {setCurrentPage}
+                    currentPage = {currentPage}/>
+                </div>
             </div>
         );
     };

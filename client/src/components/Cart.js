@@ -32,11 +32,11 @@ const Cart = () => {
                                 </Col>
                             </Row>
                         ))
-                    }
+                    }                
+                    <div className ="text-center">
+                        <p>Total Checkout: {totalPrice} <button>Checkout</button></p>
+                    </div>
                 </Container>
-                <div className ="text-center">
-                    <p>Total Checkout: {totalPrice} <button>Checkout</button></p>
-                </div>
             </Container>
         </div>
     );
