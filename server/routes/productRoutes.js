@@ -1,15 +1,18 @@
 const router = require('express').Router()
-const db = require('../productQueries')
+const { verifyTokenAndAdmin, authenticateToken } = require('../auth')
+const db = require('../queries/productQueries')
 
 // get all products order by ID
 router.get('/product', db.getProducts)
 // get product by ID
 router.get('/product/:id', db.getProductById)
 // post new products
-router.post('/product', db.createProduct)
+router.post('/product',verifyTokenAndAdmin, db.createProduct)
 // update product by ID
-router.put('/product/:id', db.updateProduct)
+router.put('/product/:id',verifyTokenAndAdmin, db.updateProduct)
 // delete product by ID
-router.delete('/product/:id', db.deleteProductById)
+router.delete('/product/:id',verifyTokenAndAdmin, db.deleteProductById)
+// filter categories
+router.get('/product_filter', db.filterCategorie)
 
 module.exports = router;

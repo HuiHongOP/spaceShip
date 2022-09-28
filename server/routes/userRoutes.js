@@ -1,10 +1,11 @@
 const router = require('express').Router()
 const { authenticateToken } = require('../auth')
-const db = require('../usersQueries')
+const db = require('../queries/usersQueries')
 
 router.get('/accounts',authenticateToken, db.getUsers)
 router.get('/accounts/:id', authenticateToken, db.getUserById)
-router.post('/accounts', authenticateToken, db.createUser)
+// CREATE USER
+router.post('/accounts', db.createUser)
 router.put('/accounts/:id', authenticateToken, db.updateUser)
 router.delete('/accounts/:id', authenticateToken, db.deleteUser)
 router.post('/login', db.login)

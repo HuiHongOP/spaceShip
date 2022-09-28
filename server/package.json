@@ -2,7 +2,11 @@
   "name": "server",
   "version": "1.0.0",
   "description": "",
+  "private": true,
   "main": "express.js",
+  "engines": {
+    "node": "16.x"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node express",
