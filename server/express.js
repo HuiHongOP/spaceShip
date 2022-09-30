@@ -10,7 +10,7 @@ const cookieParser = require("cookie-parser");
 const compression = require('compression')
 const helmet = require('helmet')
 const cors = require('cors')
-//const isProduction = process.env.NODE_ENV === 'production'
+const isProduction = process.env.NODE_ENV === 'production'
 const origin = {
   origin: isProduction ? ["https://spaceshipacc.herokuapp.com", "http://localhost:3000"] : '*'
 }
