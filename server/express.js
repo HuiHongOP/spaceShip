@@ -12,10 +12,10 @@ const helmet = require('helmet')
 const cors = require('cors')
 //const isProduction = process.env.NODE_ENV === 'production'
 const origin = {
-  origin: isProduction ? 'http://localhost:3000' : '*'
+  origin: isProduction ? ["https://spaceshipacc.herokuapp.com", "http://localhost:3000"] : '*'
 }
 
-app.use(cors(origin))
+app.use(cors({credentials:true, origin}))
 app.use(compression())
 app.use(helmet())
 app.use(cookieParser())
