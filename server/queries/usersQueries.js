@@ -99,6 +99,7 @@ const login = async (req,res) => {
         let token = jwtTokens.jwtTokens(users.rows[0]);
         // refresh token send response as cookie
         res.cookie('refresh_token', token.refresh_token, {httpOnly:true});
+        res.cookie('username', username, {httpOnly:true})
         res.json(token);
        //res.status(200).send('success');
     }
