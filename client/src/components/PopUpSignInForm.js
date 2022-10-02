@@ -1,16 +1,23 @@
 import axios from 'axios';
-import { useState,useEffect } from 'react';
+import { useRef, useState,useEffect } from 'react';
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import Cookies from "js-cookie"
 
 const PopUpSignInForm = () =>{
+
+    const userRef = useRef();
+    const errRef = useRef();
     const navigate = useNavigate();
     const [username, setUser] = useState("");
     const [password, setPwd] = useState("");
     const [err, setErr] = useState("");
     const [success, setSuccess] = useState(false);
-    let componentMounted = true;
     
+    useEffect(() => {
+        userRef.current.focus();
+    }, [])
+
     useEffect (() => {
         setErr("");
     },[username, password])
@@ -29,20 +36,25 @@ const PopUpSignInForm = () =>{
                 }
             )
             console.log(response)
-            const access_token = response?.data?.access_token;
-            const refresh_token = response?.data?.access_token;
-            localStorage.setItem("access_token", access_token);
-            localStorage.setItem("refresh_token", refresh_token)
-            setUser('');
-            setPwd('');
-            setSuccess(true);
-            navigate("/")
+            if (response.status == 200){
+                const access_token = response?.data?.access_token;
+                const refresh_token = response?.data?.access_token;
+                localStorage.setItem("access_token", access_token);
+                localStorage.setItem("refresh_token", refresh_token);
+                Cookies.set("username", username)
+                setUser('');
+                setPwd('');
+                setSuccess(true);
+                navigate("/")
+            } else {
+                setErr(response.error)
+            }
         } catch (error) {
-            if (!err?.response) {
+            if (!error?.response) {
                 setErr('No Server Response');
-            } else if (err.response?.status === 400) {
+            } else if (error.response?.status === 400) {
                 setErr('Missing Username or Password');
-            } else if (err.response?.status === 401) {
+            } else if (error.response?.status === 401) {
                 setErr('Unauthorized');
             } else {
                 setErr('Login Failed');
@@ -51,10 +63,10 @@ const PopUpSignInForm = () =>{
     };
 
     return (
-        <section className = "sign-in-section text-center m-3">
+        <section className = "text-center m-3">
             <div>
-                <form className="sign-in-form" onSubmit={handleSubmit}>
-                    <h2>Welcome to Sign in Form</h2>
+                <h2>Welcome to Sign in Form</h2>
+                <form action="/" ref={userRef} method="get" onSubmit={handleSubmit}>
                     <div>
                         <label for="name">Username/Email Address</label>
                         <input type="text" name="userName" placeholder="Input Username" onChange = { (e) => setUser(e.target.value)} required/>
@@ -68,6 +80,7 @@ const PopUpSignInForm = () =>{
                     </div>
                 </form>
             </div>
+        <p style={{color:'red'}} ref={errRef} className={err ? "err" : "offscreen"} aria-live="assertive">{err}</p>
         </section>
     );
 }
