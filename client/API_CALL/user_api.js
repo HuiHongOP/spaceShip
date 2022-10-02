@@ -106,7 +106,4 @@ module.exports = {
     login,
     refresh_token,
     logout
-    
-
-
 }

@@ -27,3 +27,12 @@
     top: 40%;
     left: 40%;
 }
+
+
+/* Product Page */
+.left-feature{
+    float:left;
+}
+.right-product{
+    float:right;
+}
