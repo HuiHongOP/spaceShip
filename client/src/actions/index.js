@@ -11,3 +11,11 @@ export const delCart = (product) =>{
         payload: product
     }
 }
+
+
+export const storeProducts = (product) => {
+    return {
+        type:"STORAGE",
+        payload: product
+    }
+}

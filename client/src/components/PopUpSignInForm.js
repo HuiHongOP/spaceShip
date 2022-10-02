@@ -46,6 +46,7 @@ const PopUpSignInForm = () =>{
                 setPwd('');
                 setSuccess(true);
                 navigate("/")
+                window.location.reload(false);
             } else {
                 setErr(response.error)
             }

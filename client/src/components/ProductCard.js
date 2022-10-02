@@ -10,7 +10,7 @@ const ProductCard = ({filter}) => {
         <Container>
             <Row xs={2} md={3} lg={4} className="g-4">
                 {filter.map((product,idex) => (
-                    <Col>
+                    <Col key ={idex}>
                         <Card className="h-100">
                             <Card.Img variant="top" className="p-1"src={product.category.image} />
                             <Card.Body>
@@ -23,7 +23,7 @@ const ProductCard = ({filter}) => {
                     </Col>
                 ))}
             </Row>
-    </Container>
+        </Container>
     );
 };
 

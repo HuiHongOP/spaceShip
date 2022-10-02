@@ -12,7 +12,7 @@ const Banner = () =>{
                 <Card.Text>CHECK OUT ALL THE TRENDS</Card.Text>
             </Container>
         </Card.ImgOverlay>
-        </Card>
+    </Card>
   );
 }
 export default Banner;

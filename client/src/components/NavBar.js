@@ -12,13 +12,14 @@ const NavBar = ()=>{
 
   useEffect (() => {
     setUser(Cookies.get("username"));
-  },[username])
+  },[username]);
 
   const logOut = () =>{
     localStorage.clear();
     Cookies.remove("username");
     setUser("")
   }
+
   return(
   <Navbar bg="light" expand="lg" >
       <Container>

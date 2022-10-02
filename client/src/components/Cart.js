@@ -11,32 +11,34 @@ const Cart = () => {
     return (
         <div id ="cart">
             <Container>
-                <Container>
+                <Container >
                     {cartItems.map((product,idex) =>(
-                            <Row>
-                                <Col>
-                                    <div>
-                                        <img src={product.category.image} alt ="Product-Img"/>
-                                    </div>
-                                </Col>
-                                <Col>
-                                    <div>
-                                        <p>Product: {product.title}</p>
-                                        <p>description: {product.description}</p>
-                                        <p>Each cost {product.price}</p>
-                                        <p> The total price is : {product.qty * product.price}</p>
-                                        <p>The quality is : {product.qty}</p>
-                                        <button onClick ={ ()=> dispatch(addCart(product))}>+</button>
-                                        <button onClick ={ ()=> dispatch(delCart(product))}>-</button>
-                                    </div>
-                                </Col>
-                            </Row>
+                        <div className="cart-box m-2 text-center">
+                            <div>
+                                <img className = "cart-image" src={product.category.image} alt ="Product-Img"/>
+                            </div>
+                            <div>
+                                {/* product title */}
+                                <p>{product.title}</p>
+                                <p>description: {product.description}</p>
+                                {/* <p> The total price is : {product.qty * product.price}</p> */}
+                                <button onClick ={ ()=> dispatch(addCart(product))}>+</button>
+                                {/* Unit amount order */}
+                                <span> {product.qty} </span>
+                                <button onClick ={ ()=> dispatch(delCart(product))}>-</button>
+                            </div>
+                            <div>
+                                {/* Cost of each unit */}
+                                <span> ${product.price}</span>
+                            </div>
+                            <hr/>
+                        </div>
                         ))
-                    }
+                    }                
+                    <div className ="text-center">
+                        <p>Total Checkout: {totalPrice} <button>Checkout</button></p>
+                    </div>
                 </Container>
-                <div className ="text-center">
-                    <p>Total Checkout: {totalPrice} <button>Checkout</button></p>
-                </div>
             </Container>
         </div>
     );
