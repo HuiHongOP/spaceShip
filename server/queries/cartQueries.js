@@ -43,8 +43,8 @@ const update_cart = async(req,res) => {
         const product = req.body.items.items.product
         const qty = req.body.items.items.qty
         //const query = `UPDATE cart SET items = jsonb_set(items, '{items, product}' ,' + product + ', false) WHERE id = ' + cart_id + ')`
-        const cart = await pool.query(`UPDATE cart SET items = jsonb_set(items, '{items, product}', '"${product}"', false) WHERE id = $1`,[cart_id]);
-        const quantity = await pool.query(`UPDATE cart SET items = jsonb_set(items, '{items, qty}', '${qty}', false) WHERE id = $1`,[cart_id])
+        await pool.query(`UPDATE cart SET items = jsonb_set(items, '{items, product}', '"${product}"', false) WHERE id = $1`,[cart_id]);
+        await pool.query(`UPDATE cart SET items = jsonb_set(items, '{items, qty}', '${qty}', false) WHERE id = $1`,[cart_id])
         //const cart = await pool.query(query)
         res.status(200).send(`Cart has been updated`)
     }

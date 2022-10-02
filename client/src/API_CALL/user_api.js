@@ -23,8 +23,6 @@ const axios = require('axios').default;
     })
  }
 
-//register('bobbyShmurda123','bobbyshmurda594293@spaceship.com','bobbyboy321')
-
 // get all accounts
 const getUsers = () => {
     axios.get('https://spaceshipacc.herokuapp.com/api/user/accounts')
