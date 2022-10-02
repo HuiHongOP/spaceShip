@@ -51,7 +51,7 @@ const Products = ()=>{
 
     const DisplayProductCards = () => {
         return (
-            <div id="discover">
+            <div id="">
                 <div className="text-center">
                     <button className="m-2" onClick = {()=>setFilter(data)}> ALL</button>
                     <button className="m-2" onClick = {()=>filterCategory("Shoes")}> Shoes</button>

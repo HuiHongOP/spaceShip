@@ -1,0 +1,28 @@
+
+/* For ProductCard.js */
+.add-to-cart{
+    position: relative;
+    background-color: rgba(245, 230, 21, 0.9);
+    border: none;
+}
+.add-to-cart:hover{
+    background-color: rgb(250, 216, 8,0.9);
+}
+
+.price-tag{
+    font-size: 1.5rem;
+}
+
+
+
+/* Sign IN Section */
+.sign-in-section{
+    background: linear-gradient(#e66465, #9198e5);
+    height: 100vh;
+    border-radius: 2%;
+}
+.sign-in-section .sign-in-form{
+    position: absolute;
+    top: 40%;
+    left: 40%;
+}
