@@ -26,10 +26,10 @@ function App() {
           <p key={i}>{user}</p>
         )))
         } */}
-          <NavBar/>
           <div className = "content">
+            <NavBar/>
             <Routes>
-              <Route exact path="/" element ={<><Banner/><Products/></>} >
+              <Route exact path="/" element ={<><Banner/><Products/></>} forceRefresh={true} >
               </Route>
               <Route exact path="/signIn" element ={<PopUpSignInForm/>} >
               </Route>
