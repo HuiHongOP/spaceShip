@@ -36,3 +36,13 @@
 .right-product{
     float:right;
 }
+
+
+/* Cart.js */
+.cart-box{
+    display:flex;
+}
+.cart-image{
+    width: 45%;
+    height: auto;
+}

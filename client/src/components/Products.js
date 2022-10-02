@@ -46,7 +46,8 @@ const Products = ()=>{
 
         //Checking the previous state of the filterFeatures and filter by the checked category and 
         setfilterFeatures(previousState => {
-            let filters = new Set(previousState.filterFeatures);
+            let filters = new Set(previousState.filters);
+            console.log("This is filters",filters);
             let products = data;
             if (event.target.checked) {
             filters.add(event.target.value); // add in the checked feature/category
@@ -60,6 +61,8 @@ const Products = ()=>{
                 return filters.has(product.category.name);
             })
             }
+            console.log(products);
+            console.log("this is the after filters", filters);
             //Set the current filterProducts to a new product data for display
             setFilterProducts(products);
             return {
@@ -67,27 +70,25 @@ const Products = ()=>{
             }
     })
 
+        /*
 
-
-    /*
-
-
-    */
-    setCheckedState(previousState=>{
-        if(previousState.length === 0){
-            const unique = [...new Set(data.map(product => product.category.name))];
-            const newArray = new Array(unique.length).fill(false);
-            let updateCheckedState = newArray.map((item,indx) =>
+            Check the previousState for the "checked box or non-checked box" and return the opposite when user click on that opinion
+        */
+        setCheckedState(previousState=>{
+            if(previousState.length === 0){
+                const unique = [...new Set(data.map(product => product.category.name))];
+                const newArray = new Array(unique.length).fill(false);
+                let updateCheckedState = newArray.map((item,indx) =>
+                    indx === index ? !item : item
+                );
+                return updateCheckedState;
+            }
+            else{
+                let updateCheckedState = checkState.map((item,indx) =>
                 indx === index ? !item : item
-            );
-            return updateCheckedState;
-        }
-        else{
-            let updateCheckedState = checkState.map((item,indx) =>
-            indx === index ? !item : item
-            );
-            return updateCheckedState;
-        }
+                );
+                return updateCheckedState;
+            }
     },);
 
     }, [setfilterFeatures]);
@@ -134,7 +135,9 @@ const Products = ()=>{
     },[]);
 
 
-
+    /* 
+        This a function that load up the skeletons of loading screen while the api data is in the process of fetching
+    */
     const Loading = () =>{
         return(
             <Container className="text-center">
@@ -144,11 +147,17 @@ const Products = ()=>{
         );
     }
 
+
+    //Keep in track of the pages that the user is on
     const lastPostIndex = currentPage * postsPerPage;
     const firstPostIndex = lastPostIndex - postsPerPage;
     const currentPosts = filterProducts.slice(firstPostIndex,lastPostIndex);
     
 
+
+    /* 
+        Render the ProductsCard, pages, and categories into the website
+    */
     const DisplayProductCards = () => {
         return (
             <Container fluid id="">
@@ -169,13 +178,13 @@ const Products = ()=>{
                     )))}
     
                 </div>
-                <div className = "text-center right-products">
-                    <h2>Check out the products! </h2>
-                    <ProductCard filter={currentPosts}/>
-                    <PageinationComp totalPosts={filterProducts.length}
-                    postsPerPage = {postsPerPage}
-                    setCurrentPage = {setCurrentPage}
-                    currentPage = {currentPage}/>
+                    <div className = "text-center right-products">
+                        <h2>Check out the products! </h2>
+                        <ProductCard filter={currentPosts}/>
+                        <PageinationComp totalPosts={filterProducts.length}
+                        postsPerPage = {postsPerPage}
+                        setCurrentPage = {setCurrentPage}
+                        currentPage = {currentPage}/>
                 </div>
             </Container>
         );
@@ -184,6 +193,7 @@ const Products = ()=>{
 
     return (
         <div>
+            {/* Check whether if the api url is in process of fetching or else display all the products into screen */}
             {loading ? <Loading/> : <DisplayProductCards/>}
         </div>
     );
