@@ -1,16 +1,19 @@
 import axios from 'axios';
-import {useRef, useState,useEffect } from 'react';
+import { useRef, useState,useEffect } from 'react';
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import Cookies from "js-cookie"
 
 
 const PopUpSignUpForm = () =>{
     const userRef = useRef();
     const errRef = useRef();
-
+    const navigate = useNavigate();
     const [username, setUser] = useState("");
     const [password, setPwd] = useState("");
     const [err, setErr] = useState("");
-    //const [success, setSuccess] = useState(false);
-    //let componentMounted = true;
+    const [email, setEmail] = useState("");
+    const [success, setSuccess] = useState(false);
     
     useEffect(() => {
         userRef.current.focus();
@@ -18,29 +21,45 @@ const PopUpSignUpForm = () =>{
 
     useEffect (() => {
         setErr("");
-    },[username, password])
+    },[username, email, password])
 
     const handleSubmit = async (event) =>{
         event.preventDefault();
         try {
-            const response = await axios.post("spaceshipusers.herokuapp.com/accounts", 
-                JSON.stringify({username, password}), 
+            const response = await axios.post("https://spaceshipacc.herokuapp.com/api/user/accounts", 
+                JSON.stringify(
+                {   username:username,
+                    email:email,
+                    password:password,
+                    isadmin: false
+                }), 
                 {
                     headers: { 'Content-Type': 'application/json' },
                     withCredentials: true
                 }
 
             )
-            const accessToken = response?.data?.accessToken;
-            localStorage.setItem("accessToken", accessToken);
-            setUser('');
-            setPwd('');
-            //setSuccess(true);
+            console.log(response)
+            if (response.status == 200){
+                const access_token = response?.data?.access_token;
+                const refresh_token = response?.data?.access_token;
+                localStorage.setItem("access_token", access_token);
+                localStorage.setItem("refresh_token", refresh_token);
+                Cookies.set("username", username)
+                setUser('');
+                setPwd('');
+                setEmail('');
+                setSuccess(true);
+                navigate("/")
+                window.location.reload(false);
+            } else {
+                setErr(response.error)
+            }
         } catch (error) {
             if (!err?.response) {
                 setErr('No Server Response');
             } else if (err.response?.status === 400) {
-                setErr('Missing Username or Password');
+                setErr('Missing Username, email or Password');
             } else if (err.response?.status === 401) {
                 setErr('Unauthorized');
             } else {
