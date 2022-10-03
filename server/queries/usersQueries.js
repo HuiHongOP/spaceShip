@@ -42,6 +42,7 @@ const createUser = async (req,res) => {
         const password = req.body.password
         const hashedPassword = await bcrypt.hash(password, 10);
         const newUser = await pool.query('INSERT INTO users (username,email,password) VALUES ($1,$2,$3) RETURNING *', [username,email,hashedPassword]);
+        res.cookie('username', username)
         res.json({users:newUser.rows[0]});
     }
     catch (error) {
